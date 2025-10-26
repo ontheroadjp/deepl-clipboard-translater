@@ -1,20 +1,23 @@
-# DeepL Translate English Tool
+# DeepL Clipboard Translater Tool
 
 ## Overview
 
-This document provides a specification for the `deepl-translate-en.py` script.
+This document provides a specification for the `deepl-clipboard-translater.py` script.
 
 ## Purpose
 
-The `deepl-translate-en.py` script is a command-line tool that translates Japanese text to English. It is designed to be simple and easy to use, integrating with the system clipboard for input.
+The `deepl-clipboard-translater.py` script is a command-line tool that translates text from the clipboard into a specified language. The source language is automatically detected by the DeepL API.
 
 ## Features
 
--   Translates Japanese text from the clipboard to English.
+-   Translates text from the clipboard.
+-   Automatically detects the source language.
+-   Allows specifying the target language from a set of supported languages (JA, EN, ZH, KO).
+-   Defaults to English if no target language is specified.
 -   Uses the DeepL API for translation.
 -   Securely handles the API key using a `.env` file.
 -   Outputs the translated text to standard output.
--   Provides clear error messages for common issues (e.g., missing API key, empty clipboard, API errors).
+-   Provides clear error messages for common issues.
 
 ## Technical Details
 
@@ -23,6 +26,7 @@ The `deepl-translate-en.py` script is a command-line tool that translates Japane
     -   `requests`: For making HTTP requests to the DeepL API.
     -   `pyperclip`: For accessing the system clipboard.
     -   `python-dotenv`: For loading environment variables from a `.env` file.
+    -   `argparse`: For parsing command-line arguments.
 -   **API Endpoint:** `https://api-free.deepl.com/v2/translate`
 -   **Authentication:** The DeepL API key is passed in the `auth_key` parameter of the request.
 
