@@ -2,11 +2,14 @@
 # -*- coding: utf-8 -*-
 
 """
-This script translates Japanese text from the clipboard to English using the DeepL API.
+This script translates text from the clipboard using the DeepL API,
+supporting Japanese, English, Chinese, and Korean as target languages.
+The source language is automatically detected.
 """
 
 import os
 import sys
+import argparse
 
 if sys.version_info[0] < 3:
     sys.stderr.write("This script requires Python 3.\n")
@@ -28,6 +31,12 @@ def main():
     """
     Main function to translate clipboard text.
     """
+    parser = argparse.ArgumentParser(description="Translate text from the clipboard using DeepL.")
+    supported_langs = ["JA", "EN", "ZH", "KO"]
+    parser.add_argument("-o", "--target_lang", type=str.upper, default="EN", choices=supported_langs,
+                        help=f"Target language. Supported: {', '.join(supported_langs)}. Defaults to EN.")
+    args = parser.parse_args()
+
     script_dir = os.path.dirname(os.path.realpath(__file__))
     dotenv_path = os.path.join(script_dir, '.env')
     load_dotenv(dotenv_path=dotenv_path)
@@ -46,8 +55,7 @@ def main():
     params = {
         "auth_key": api_key,
         "text": clipboard_text,
-        "source_lang": "JA",
-        "target_lang": "EN",
+        "target_lang": args.target_lang,
     }
 
     try:

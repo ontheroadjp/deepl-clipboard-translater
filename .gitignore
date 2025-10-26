@@ -2,3 +2,4 @@
 bk_*
 
 .env
+venv/

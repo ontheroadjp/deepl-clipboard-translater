@@ -1,6 +1,6 @@
-# DeepL Translate English
+# DeepL Clipboard Translater
 
-This script translates Japanese text from the clipboard to English using the DeepL API.
+This script translates text from the clipboard into a specified language using the DeepL API. The source language is automatically detected.
 
 ## Requirements
 
@@ -9,13 +9,13 @@ This script translates Japanese text from the clipboard to English using the Dee
 
 ## Installation
 
-1.  Install the required Python libraries using pip. The `--user` flag is recommended to avoid modifying system-wide packages.
+1.  Install the required Python libraries using pip.
 
     ```bash
-    python3 -m pip install --user -r /Users/hideaki/dotfiles/tools/deepl-translate-en/requirements.txt
+    python3 -m pip install -r requirements.txt
     ```
 
-2.  Create a `.env` file in the `tools/deepl-translate-en/` directory.
+2.  Create a `.env` file in the same directory as the script.
 
 3.  Add your DeepL API key to the `.env` file:
 
@@ -25,21 +25,31 @@ This script translates Japanese text from the clipboard to English using the Dee
 
 ## Usage
 
-1.  Copy some Japanese text to your clipboard.
-2.  Run the script:
+1.  Copy some text to your clipboard.
+2.  Run the script. By default, it translates to English.
 
     ```bash
-    ./tools/deepl-translate-en/deepl-translate-en.py
+    python3 deepl-clipboard-translater.py
     ```
 
-The English translation will be printed to the standard output.
+To specify a different target language, use the `-o` option. Supported languages are English (EN), Japanese (JA), Chinese (ZH), and Korean (KO).
 
-You can pipe the output to `pbcopy` to copy the translation to your clipboard:
+-   Translate to Japanese:
+    ```bash
+    python3 deepl-clipboard-translater.py -o ja
+    ```
+
+-   Translate to Chinese:
+    ```bash
+    python3 deepl-clipboard-translater.py -o zh
+    ```
+
+You can pipe the output to `pbcopy` (on macOS) or `xclip` (on Linux) to copy the translation to your clipboard:
 ```bash
-./tools/deepl-translate-en/deepl-translate-en.py | pbcopy
+python3 deepl-clipboard-translater.py | pbcopy
 ```
 
 Or redirect it to a file:
 ```bash
-./tools/deepl-translate-en/deepl-translate-en.py > translation.txt
+python3 deepl-clipboard-translater.py > translation.txt
 ```
